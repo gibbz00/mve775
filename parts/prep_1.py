@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -73,6 +74,45 @@ def prep_1_8(epsilon=1e-10) -> int:
         n += 1
 
 
+def prep_2_1(test_x: list[int], test_y: list[int]):
+    f = lambda x: (1 + x) / (2 + x)
+    f_inv = lambda x: (2 * x - 1) / (1 - x)
+
+    for x in test_x:
+        assert x != 2
+        np.testing.assert_approx_equal(f_inv(f(x)), x)
+
+    for y in test_y:
+        assert y != 1
+        np.testing.assert_approx_equal(f(f_inv(y)), y)
+
+
+def prep_2_2():
+    f = lambda x: x**2 - 1
+    g = lambda x: x + 1
+    h = lambda x: f(g(x))
+
+    return h(3)
+
+
+def prep_2_3():
+    def plot_impl(lambdas):
+        x = np.linspace(0.1, np.pi, 1000)
+        for i, f in enumerate(lambdas):
+            plt.plot(x, f(x), linewidth=i + 1)
+
+        plt.show()
+
+    a = lambda x: np.sin(np.exp(x))
+    # x > 0
+    b = lambda x: np.sin(np.log(x))
+    c = lambda x: np.exp(np.sin(x))
+    # sin(x) > 0 --> x < pi
+    d = lambda x: np.log(np.sin(x))
+
+    plot_impl([a, b, c, d])
+
+
 if __name__ == "__main__":
     print(prep_1_1())
     print(prep_1_2())
@@ -82,3 +122,7 @@ if __name__ == "__main__":
     print(prep_1_6())
     print(prep_1_7())
     print(prep_1_8())
+
+    prep_2_1([1, 4, 5, -20], [2, 4, 10, -20])
+    print(prep_2_2())
+    prep_2_3()
