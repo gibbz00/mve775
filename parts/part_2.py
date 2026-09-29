@@ -62,15 +62,18 @@ def part_2_1():
     h_range = lambda n: 0.1 / 2 ** np.arange(0, n)
 
     f = lambda x: (1 + x) ** (1 / x)
+    print("Part 1 f(x) = (1 + x)^(1/x)")
     present_richardson(f, 0, h_range(4), np.e)
 
     g = lambda x: (np.e ** np.sqrt(x) - 1) / np.sqrt(x)
+    print("Part 1 g(x) = (e^sqrt(x) - 1)/sqrt(x)")
     present_richardson(g, 0, h_range(10), 1)
 
 
 def part_2_2():
     f = lambda x: (2**x - 1) / x
     results = limited_approx(richardson_hat, f, 0, 1, 10e-5, 20, np.log(2))
+    print("Part 2 f(x) = (2^x - 1) / x")
     print(tab.tabulate(results, headers=["i", "h", "r_hat", "err"]))
 
 
@@ -84,6 +87,7 @@ def part_2_3():
     h = 10.0 ** (-np.arange(1, 15))
 
     _fig, ax = plt.subplots()
+    ax.set_title("Part 3")
     ax.set_xlabel("h")
     ax.set_ylabel("err")
     ax.grid(True)
@@ -105,6 +109,7 @@ def part_2_4():
         richardson_derivative, f, 1, 0.1, 10e-10, 10, -0.11079376530669924
     )
 
+    print("Part 4 f(x) = e^-x * sin(x)")
     print(tab.tabulate(results, headers=["i", "h", "r_dev", "err"]))
 
 
