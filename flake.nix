@@ -40,6 +40,7 @@
             packages = with pkgs; [
               python314Packages.numpy
               python314Packages.matplotlib
+              python314Packages.tabulate
             ];
           };
         };
