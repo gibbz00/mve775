@@ -57,7 +57,13 @@ def part_2_1():
         values = richardson_hat(f, x_bar, h)
         err = np.abs(values - expected)
         r = konvergence_order(f, x_bar, h)
-        print(tab.tabulate(zip(h, r, values, err), headers=["h", "r", "r_hat", "err"]))
+        print(
+            tab.tabulate(
+                zip(h, r, values, err),
+                headers=["h", "r", "r_hat", "err"],
+                tablefmt="simple_outline",
+            )
+        )
 
     h_range = lambda n: 0.1 / 2 ** np.arange(0, n)
 
@@ -72,9 +78,13 @@ def part_2_1():
 
 def part_2_2():
     f = lambda x: (2**x - 1) / x
-    results = limited_approx(richardson_hat, f, 0, 1, 10e-5, 20, np.log(2))
+    results = limited_approx(richardson_hat, f, 0, 1, 1e-5, 20, np.log(2))
     print("Part 2 f(x) = (2^x - 1) / x")
-    print(tab.tabulate(results, headers=["i", "h", "r_hat", "err"]))
+    print(
+        tab.tabulate(
+            results, headers=["i", "h", "r_hat", "err"], tablefmt="simple_outline"
+        )
+    )
 
 
 def part_2_3():
@@ -106,11 +116,15 @@ def part_2_4():
     f = lambda x: np.e**-x * np.sin(x)
 
     results = limited_approx(
-        richardson_derivative, f, 1, 0.1, 10e-10, 10, -0.11079376530669924
+        richardson_derivative, f, 1, 0.1, 1e-10, 10, -0.11079376530669924
     )
 
     print("Part 4 f(x) = e^-x * sin(x)")
-    print(tab.tabulate(results, headers=["i", "h", "r_dev", "err"]))
+    print(
+        tab.tabulate(
+            results, headers=["i", "h", "r_dev", "err"], tablefmt="simple_outline"
+        )
+    )
 
 
 if __name__ == "__main__":
